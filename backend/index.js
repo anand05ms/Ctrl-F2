@@ -51,28 +51,44 @@ initTables().catch(console.error);
 const questions = [
   {
     id: 1,
-    question: "What is the capital of France?",
-    answer: "paris",
-    clue: "It's also called the city of lights.",
+    question: "Clue: 01000011 01101100 01110101 01100101",
+    answer: "CLUE",
+    clue: "It's not a word, is it?",
   },
-  { id: 2, question: "What is 5 + 7?", answer: "12", clue: "Think dozen." },
+  {
+    id: 2,
+    question:
+      "Location: If TCE were a web series, this is YOUR first season. Spoiler alert: all characters are blue. Go to the place where YOU are the default setting! If other rooms are dusky, this one clearly uses Fair & Lovely for its floor",
+    answer: "AND",
+    clue: "Home of first years, where the floor is fair",
+  },
   {
     id: 3,
-    question: "What color do you get by mixing red and white?",
-    answer: "pink",
-    clue: "A light red shade.",
+    question:
+      "Location: There's 'me' between u and ur crush And you will have headache if i am organic, Now find my home",
+    answer: "bubble sort",
+    clue: "A place where rxns take place",
   },
   {
     id: 4,
-    question: "What is the chemical symbol for water?",
-    answer: "h2o",
-    clue: "Two hydrogens, one oxygen.",
+    question:
+      "Location: Beneath wide arms of green and shade, A quiet circle gently made. Roots above, calm below — Find the tree where soft winds flow. And i am welcoming you to the maduaris top clg , goated dept",
+    answer: "compiler",
+    clue: "National tree, look beneath",
   },
   {
     id: 5,
-    question: "Which planet is known as the Red Planet?",
-    answer: "mars",
-    clue: "Named after the Roman god of war.",
+    question:
+      "Your next clue isn’t in bricks and benches, It’s in likes and follows. If you’re an engineer, you know IE. If you’re from here, you know TCE. Add a dot in between… and stop overthinking",
+    answer: "recursion",
+    clue: "search in the ocean where you reel",
+  },
+  {
+    id: 6,
+    question:
+      "Location: clue is in 'pItFlick lights guide you — the capitals and enclosure are shining; follow (2) beams to the clue'",
+    answer: "if2",
+    clue: "It's definitely not in CSE. IT maybe",
   },
 ];
 
