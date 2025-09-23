@@ -121,12 +121,12 @@ app.post("/login", async (req, res) => {
   }
 });
 
-// Get question by ID
+// Get question by ID — now also returns clue
 app.get("/question/:id", (req, res) => {
   const id = parseInt(req.params.id);
   const question = questions.find((q) => q.id === id);
   if (!question) return res.status(404).json({ error: "Question not found" });
-  res.json({ question: question.question });
+  res.json({ question: question.question, clue: question.clue });
 });
 
 // Verify answer + log progress + record submission
