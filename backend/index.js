@@ -86,7 +86,7 @@ const questions = [
   {
     id: 6,
     question:
-      "Location: clue is in 'l<em>I</em>t<em>F</em>lick lights guide you — the capitals and enclosure are shining; follow (2) beams to the clue'",
+      "Location: clue is in 'p<em>I</em>t<em>F</em>lick lights guide you — the capitals and enclosure are shining; follow (2) beams to the clue'",
     answer: "if2",
     clue: "It's definitely not in CSE. IT maybe",
   },
