@@ -9,9 +9,17 @@ const app = express();
 // Set your frontend's domain as the allowed origin.
 // In this case, it's the Vercel URL.
 const allowedOrigins = ["https://ctrl-f2-frontend.vercel.app"];
+
 const corsOptions = {
   origin: function (origin, callback) {
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+    // Check if the origin is in the allowed list or if it's a Vercel preview deployment
+    const isAllowed = allowedOrigins.indexOf(origin) !== -1 || !origin;
+    const isVercelPreview =
+      origin &&
+      origin.startsWith("https://ctrl-f2-frontend-") &&
+      origin.endsWith(".vercel.app");
+
+    if (isAllowed || isVercelPreview) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
@@ -38,31 +46,31 @@ const pool = new Pool({
 const initTables = async () => {
   try {
     await pool.query(`
-            CREATE TABLE IF NOT EXISTS teams (
-                id SERIAL PRIMARY KEY,
-                teamName TEXT UNIQUE
-            );
-        `);
+      CREATE TABLE IF NOT EXISTS teams (
+        id SERIAL PRIMARY KEY,
+        teamName TEXT UNIQUE
+      );
+    `);
 
     await pool.query(`
-            CREATE TABLE IF NOT EXISTS progress (
-                id SERIAL PRIMARY KEY,
-                teamId INT REFERENCES teams(id),
-                clueId INT,
-                clearedAt TEXT
-            );
-        `);
+      CREATE TABLE IF NOT EXISTS progress (
+        id SERIAL PRIMARY KEY,
+        teamId INT REFERENCES teams(id),
+        clueId INT,
+        clearedAt TEXT
+      );
+    `);
 
     await pool.query(`
-            CREATE TABLE IF NOT EXISTS submissions (
-                id SERIAL PRIMARY KEY,
-                teamId INT REFERENCES teams(id),
-                teamName TEXT,
-                questionId INT,
-                answer TEXT,
-                submittedAt TEXT
-            );
-        `);
+      CREATE TABLE IF NOT EXISTS submissions (
+        id SERIAL PRIMARY KEY,
+        teamId INT REFERENCES teams(id),
+        teamName TEXT,
+        questionId INT,
+        answer TEXT,
+        submittedAt TEXT
+      );
+    `);
     console.log("Tables initialized successfully.");
   } catch (err) {
     console.error("Error initializing tables:", err);
