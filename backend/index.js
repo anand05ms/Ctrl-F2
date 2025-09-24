@@ -51,30 +51,30 @@ initTables().catch(console.error);
 const questions = [
   {
     id: 1,
-    question: "Clue: 01000011 01101100 01110101 01100101",
-    answer: "CLUE",
+    question: "Clue: 01010011 01010100 01000001 01010010 01010100",
+    answer: "start",
     clue: "It's not a word, is it?",
   },
   {
     id: 2,
     question:
-      "Location: If TCE were a web series, this is YOUR first season. Spoiler alert: all characters are blue. Go to the place where YOU are the default setting! If other rooms are dusky, this one clearly uses Fair & Lovely for its floor",
-    answer: "AND",
-    clue: "Home of first years, where the floor is fair",
+      "Location: Take the steps down to the secret island below. Search for the water once danced… but oops! It’s gone on a vacation. Your clue waits where the dry droplets sit",
+    answer: "binomial",
+    clue: "It's the pride of CSE's hometown",
   },
   {
     id: 3,
     question:
-      "Location: There's 'me' between u and ur crush And you will have headache if i am organic, Now find my home",
-    answer: "bubble sort",
-    clue: "A place where rxns take place",
+      "Location: No kings, no queens, only a table where everyone’s opinion matters. Sit in the circle of wisdom — your next clue is hiding there",
+    answer: "firewall",
+    clue: "You should know the round table, but maybe it's not the easier one",
   },
   {
     id: 4,
     question:
-      "Location: Beneath wide arms of green and shade, A quiet circle gently made. Roots above, calm below — Find the tree where soft winds flow. And i am welcoming you to the maduaris top clg , goated dept",
-    answer: "compiler",
-    clue: "National tree, look beneath",
+      "Location: -.. .-. .. -. -.- .. -. --. / .-- .- - . .-. / ... .--. --- -   its the “main” spot",
+    answer: "deque",
+    clue: "Mars Co",
   },
   {
     id: 5,
@@ -86,7 +86,7 @@ const questions = [
   {
     id: 6,
     question:
-      "Location: clue is in 'p<em>I</em>t<em>F</em>lick lights guide you — the capitals and enclosure are shining; follow (2) beams to the clue'",
+      "Location: Legends say the numbers 0x49 and 0x46 guard a secret. Combine them with the SECOND sign you see and the classroom whispers your next move.",
     answer: "if2",
     clue: "It's definitely not in CSE. IT maybe",
   },
