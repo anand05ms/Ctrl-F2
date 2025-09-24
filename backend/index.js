@@ -97,7 +97,7 @@ const questions = [
     question:
       "Location: -.. .-. .. -. -.- .. -. --. / .-- .- - . .-. / ... .--. --- -  its the “main” spot",
     answer: "deque",
-    clue: "Mars Co",
+    clue: "MARS CO of where principal stays",
   },
   {
     id: 5,
