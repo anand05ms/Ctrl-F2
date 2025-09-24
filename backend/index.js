@@ -4,7 +4,25 @@ const cors = require("cors");
 const { Pool } = require("pg");
 
 const app = express();
-app.use(cors());
+
+// --- CORS Configuration ---
+// Set your frontend's domain as the allowed origin.
+// In this case, it's the Vercel URL.
+const allowedOrigins = ["https://ctrl-f2-frontend.vercel.app"];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  // Optional: Add headers if your frontend sends them (e.g., authorization headers)
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // --- PostgreSQL Setup ---
@@ -18,34 +36,39 @@ const pool = new Pool({
 
 // --- Initialize tables ---
 const initTables = async () => {
-  await pool.query(`
-    CREATE TABLE IF NOT EXISTS teams (
-      id SERIAL PRIMARY KEY,
-      teamName TEXT UNIQUE
-    );
-  `);
+  try {
+    await pool.query(`
+            CREATE TABLE IF NOT EXISTS teams (
+                id SERIAL PRIMARY KEY,
+                teamName TEXT UNIQUE
+            );
+        `);
 
-  await pool.query(`
-    CREATE TABLE IF NOT EXISTS progress (
-      id SERIAL PRIMARY KEY,
-      teamId INT REFERENCES teams(id),
-      clueId INT,
-      clearedAt TEXT
-    );
-  `);
+    await pool.query(`
+            CREATE TABLE IF NOT EXISTS progress (
+                id SERIAL PRIMARY KEY,
+                teamId INT REFERENCES teams(id),
+                clueId INT,
+                clearedAt TEXT
+            );
+        `);
 
-  await pool.query(`
-    CREATE TABLE IF NOT EXISTS submissions (
-      id SERIAL PRIMARY KEY,
-      teamId INT REFERENCES teams(id),
-      teamName TEXT,
-      questionId INT,
-      answer TEXT,
-      submittedAt TEXT
-    );
-  `);
+    await pool.query(`
+            CREATE TABLE IF NOT EXISTS submissions (
+                id SERIAL PRIMARY KEY,
+                teamId INT REFERENCES teams(id),
+                teamName TEXT,
+                questionId INT,
+                answer TEXT,
+                submittedAt TEXT
+            );
+        `);
+    console.log("Tables initialized successfully.");
+  } catch (err) {
+    console.error("Error initializing tables:", err);
+  }
 };
-initTables().catch(console.error);
+initTables();
 
 // --- Questions ---
 const questions = [
@@ -72,7 +95,7 @@ const questions = [
   {
     id: 4,
     question:
-      "Location: -.. .-. .. -. -.- .. -. --. / .-- .- - . .-. / ... .--. --- -   its the “main” spot",
+      "Location: -.. .-. .. -. -.- .. -. --. / .-- .- - . .-. / ... .--. --- -  its the “main” spot",
     answer: "deque",
     clue: "Mars Co",
   },
@@ -93,7 +116,6 @@ const questions = [
 ];
 
 // --- Routes ---
-
 // Login or register a team
 app.post("/login", async (req, res) => {
   const { teamName } = req.body;
